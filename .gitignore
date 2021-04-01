@@ -1,0 +1,4 @@
+# Python Tools
+__pycache__/
+*.pyc
+secrets.dll
