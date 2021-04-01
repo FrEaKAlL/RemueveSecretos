@@ -52,7 +52,7 @@ class ClsSecrets:
     def addSecret(self):
         campo = input('Nombre del Secreto: ')
         valor = input('Ingresa el valor: ')
-        return { 'Llave': campo, 'Valor': valor}
+        return { 'Llave': campo.upper(), 'Valor': valor}
     def PreguntaRepet(self,texto):
         pregunta = input(texto)
         if pregunta.upper() == 'S' or pregunta.upper() == 'SI':
