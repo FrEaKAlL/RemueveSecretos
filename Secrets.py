@@ -1,5 +1,7 @@
 import ManejadorDeArchivos
 import json
+from colorama import Fore, init, Style
+init(autoreset = True)
 class ClsSecrets:
     def __init__(self, secretosLista):
         if secretosLista != '':
@@ -27,19 +29,19 @@ class ClsSecrets:
         correcto = True
         while correcto:
             ruta = self.IngresaRuta()
-            correcto = self.PreguntaRepet(f'La ruta ingresada es {ruta} ¿Confirmar ruta? (S/SI) o (N/NO)')
+            correcto = self.PreguntaRepet(Fore.YELLOW + f'La ruta ingresada es {ruta} ¿Confirmar ruta? (S/SI) o (N/NO)')
         self.rutaRepositorio = ruta
     def leeSecretos(self):
         lssecretos = []
         correcto = True
         while correcto:
             lssecretos = self.IngresarSecretos()
-            correcto = self.PreguntaRepet(f'Los secretos ingresados son {lssecretos} ¿Confirmar secretos? (S/SI) o (N/NO)')
+            correcto = self.PreguntaRepet(Fore.YELLOW + f'Los secretos ingresados son {lssecretos} ¿Confirmar secretos? (S/SI) o (N/NO)')
         self.listaSecretos.extend(lssecretos)
     def IngresaRuta(self):
         ruta = input('Insgresa ruta del repositorio: ')
         if not ManejadorDeArchivos.isExists(ruta):
-            print('La ruta no es correcta')
+            print(Fore.RED + 'La ruta no es correcta')
             self.IngresaRuta()
         return ruta
     def IngresarSecretos(self):
@@ -47,7 +49,7 @@ class ClsSecrets:
         addmore = False
         while not addmore:
             lssecretos.append(self.addSecret())
-            addmore = self.PreguntaRepet('¿Agregar otro secreto más? (S/SI) o (N/NO)')
+            addmore = self.PreguntaRepet(Fore.YELLOW + '¿Agregar otro secreto más? (S/SI) o (N/NO)')
         return lssecretos
     def addSecret(self):
         campo = input('Nombre del Secreto: ')

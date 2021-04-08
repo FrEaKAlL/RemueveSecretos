@@ -1,11 +1,13 @@
 #!/usr/bin/python
 from progress.bar import Bar, ChargingBar
+from colorama import Fore, init, Style
+init(autoreset = True)
 import ManejadorDeArchivos
 import Secrets
 def IniciaFlujoSecretos(Secretos):
     lista = []
     lista = ManejadorDeArchivos.ls(lista,Secretos.rutaRepositorio)
-    barra = ChargingBar('Escaneando: ', max=len(lista))
+    barra = ChargingBar(Fore.GREEN + 'Escaneando: ', max=len(lista))
     resultado = []
     for file in lista:
         contenido = ManejadorDeArchivos.readFile(file)
@@ -26,8 +28,8 @@ def IniciaFlujoSecretos(Secretos):
         barra.next()
     barra.finish()
     for msg in resultado:
-        print(msg)
-print('1. - Verifica si existen secretos configurados')
+        print(Fore.YELLOW + msg)
+print(Style.BRIGHT + Fore.CYAN + '1. - Verifica si existen secretos configurados')
 secretos = ManejadorDeArchivos.readFile('secrets.dll')
 if len(secretos) == 0:
     print('No hay secretos configurados')
@@ -37,21 +39,21 @@ if len(secretos) == 0:
     if not Secretos.ValidaListas():
         Secretos.leeSecretos()
     Secretos.SaveSecrets()
-    print('2. - Inicia flujo para ocultar secretos')
+    print(Style.BRIGHT + Fore.CYAN + '2. - Inicia flujo para ocultar secretos')
     IniciaFlujoSecretos(Secretos)
-    print('3. - Fin de secretos')
+    print(Style.BRIGHT + Fore.CYAN + '3. - Fin de secretos')
 else:
-    print('2. - Valida si existe ruta para el repositorio y secretos')
+    print(Style.BRIGHT + Fore.CYAN + '2. - Valida si existe ruta para el repositorio y secretos')
     Secretos = Secrets.ClsSecrets(secretos)
     if Secretos.rutaRepositorio == '':
-        print('2.1. - Inserta Ruta')
+        print(Style.BRIGHT + Fore.CYAN + '2.1. - Inserta Ruta')
         if not Secretos.ValidaRuta():
             Secretos.leeRuta()
     if Secretos.listaSecretos == []:
-        print('2.2. - Inserta Secretos')
+        print(Style.BRIGHT + Fore.CYAN + '2.2. - Inserta Secretos')
         if not Secretos.ValidaListas():
             Secretos.leeSecretos()
     Secretos.SaveSecrets()
-    print('3. - Inicia flujo para ocultar secretos')
+    print(Style.BRIGHT + Fore.CYAN + '3. - Inicia flujo para ocultar secretos')
     IniciaFlujoSecretos(Secretos)
-    print('4. - Fin de secretos')
+    print(Style.BRIGHT + Fore.CYAN + '4. - Fin de secretos')

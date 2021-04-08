@@ -1,11 +1,13 @@
 #!/usr/bin/python
 from progress.bar import Bar, ChargingBar
+from colorama import Fore, init, Style
+init(autoreset = True)
 import ManejadorDeArchivos
 import Secrets
 def IniciaFlujoSecretos(Secretos):
     lista = []
     lista = ManejadorDeArchivos.ls(lista,Secretos.rutaRepositorio)
-    barra = ChargingBar('Escaneando: ', max=len(lista))
+    barra = ChargingBar(Fore.GREEN + 'Escaneando: ', max=len(lista))
     resultado = []
     for file in lista:
         contenido = ManejadorDeArchivos.readFile(file)
@@ -26,16 +28,16 @@ def IniciaFlujoSecretos(Secretos):
         barra.next()
     barra.finish()
     for msg in resultado:
-        print(msg)
-print('1. - Verifica si existen secretos configurados')
+        print(Fore.YELLOW + msg)
+print(Style.BRIGHT + Fore.CYAN + '1. - Verifica si existen secretos configurados')
 secretos = ManejadorDeArchivos.readFile('secrets.dll')
 if len(secretos) == 0:
-    print('No cuenta con los secretos requeridos para este proyecto')
+    print(Fore.RED + 'No cuenta con los secretos requeridos para este proyecto')
 else:
     Secretos = Secrets.ClsSecrets(secretos)
     if Secretos.listaSecretos != []:
-        print('2. - Inicia flujo de obtencion de secretos')
+        print(Style.BRIGHT + Fore.CYAN + '2. - Inicia flujo de obtencion de secretos')
         IniciaFlujoSecretos(Secretos)
-        print('3. - Fin de secretos')
+        print(Style.BRIGHT + Fore.CYAN + '3. - Fin de secretos')
     else:
-        print('El archivo de secretos no cuenta con secretos a obtener')
+        print(Fore.RED + 'El archivo de secretos no cuenta con secretos a obtener')
