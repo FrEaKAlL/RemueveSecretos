@@ -1,4 +1,4 @@
-import ManejadorDeArchivos
+from RemueveSecretos.ManejadorDeArchivos import isExists
 import json
 from colorama import Fore, init, Style
 init(autoreset = True)
@@ -40,7 +40,7 @@ class ClsSecrets:
         self.listaSecretos.extend(lssecretos)
     def IngresaRuta(self):
         ruta = input('Insgresa ruta del repositorio: ')
-        if not ManejadorDeArchivos.isExists(ruta):
+        if not isExists(ruta):
             print(Fore.RED + 'La ruta no es correcta')
             self.IngresaRuta()
         return ruta
