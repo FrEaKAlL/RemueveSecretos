@@ -11,20 +11,14 @@ RemueveSecretos
 
 Remueve o muestra secretos para desarrollo evitando filtrar informacion no deseada en nube
 
-Usage
+Uso
 -----
+Registro creado para ocultar información sensible antes de realizar el commit o alguna otra aplicación, el uso de la librería es sobre importación al crear tu propio archivo py y poder hacer la referencia a RemuveSecretos
 
 Installation
 ------------
-
-Requirements
-^^^^^^^^^^^^
-
-Compatibility
--------------
-
-Licence
--------
+La instalación es muy sencilla mediante pip con la siguiente sintaxis
+pip install RemueveSecretos
 
 Authors
 -------
